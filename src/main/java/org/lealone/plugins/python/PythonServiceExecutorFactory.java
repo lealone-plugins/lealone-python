@@ -7,11 +7,10 @@ package org.lealone.plugins.python;
 
 import java.io.File;
 
-import org.lealone.db.PluginBase;
 import org.lealone.db.service.Service;
-import org.lealone.db.service.ServiceExecutorFactory;
+import org.lealone.db.service.ServiceExecutorFactoryBase;
 
-public class PythonServiceExecutorFactory extends PluginBase implements ServiceExecutorFactory {
+public class PythonServiceExecutorFactory extends ServiceExecutorFactoryBase {
 
     public PythonServiceExecutorFactory() {
         super("python");
