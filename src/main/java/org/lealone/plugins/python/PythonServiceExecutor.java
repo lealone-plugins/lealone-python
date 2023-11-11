@@ -46,16 +46,23 @@ public class PythonServiceExecutor extends ServiceExecutorBase {
             source = Source.newBuilder("python", new File(service.getImplementBy())).build();
             context.eval(source);
             bindings = context.getBindings("python");
+            if (size <= 0) {
+                for (String key : bindings.getMemberKeys()) {
+                    org.graalvm.polyglot.Value function = bindings.getMember(key);
+                    if (function.canExecute())
+                        functionMap.put(key.toUpperCase(), function);
+                }
+            } else {
+                for (ServiceMethod serviceMethod : service.getServiceMethods()) {
+                    String serviceMethodName = serviceMethod.getMethodName();
+                    serviceMethodMap.put(serviceMethodName, serviceMethod);
 
-            for (ServiceMethod serviceMethod : service.getServiceMethods()) {
-                String serviceMethodName = serviceMethod.getMethodName();
-                serviceMethodMap.put(serviceMethodName, serviceMethod);
-
-                String functionName = CamelCaseHelper.toCamelFromUnderscore(serviceMethodName);
-                try {
-                    functionMap.put(serviceMethodName, bindings.getMember(functionName));
-                } catch (Exception e) {
-                    throw new RuntimeException("Function not found: " + functionName, e);
+                    String functionName = CamelCaseHelper.toCamelFromUnderscore(serviceMethodName);
+                    try {
+                        functionMap.put(serviceMethodName, bindings.getMember(functionName));
+                    } catch (Exception e) {
+                        throw new RuntimeException("Function not found: " + functionName, e);
+                    }
                 }
             }
         } catch (IOException e) {
