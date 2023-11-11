@@ -34,6 +34,11 @@ public class PythonServiceExecutor extends ServiceExecutorBase {
 
         Source source;
         org.graalvm.polyglot.Value bindings;
+        ClassLoader cl = PythonServiceExecutor.class.getClassLoader();
+        // 要切换ClassLoader，否则会出现以下错误:
+        // No language and polyglot implementation was found on the classpath.
+        ClassLoader currentContextClassLoader = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(cl);
         try {
             context = Context.newBuilder().allowIO(true).allowHostAccess(HostAccess.ALL)
                     // allows access to all Java classes
@@ -41,20 +46,22 @@ public class PythonServiceExecutor extends ServiceExecutorBase {
             source = Source.newBuilder("python", new File(service.getImplementBy())).build();
             context.eval(source);
             bindings = context.getBindings("python");
+
+            for (ServiceMethod serviceMethod : service.getServiceMethods()) {
+                String serviceMethodName = serviceMethod.getMethodName();
+                serviceMethodMap.put(serviceMethodName, serviceMethod);
+
+                String functionName = CamelCaseHelper.toCamelFromUnderscore(serviceMethodName);
+                try {
+                    functionMap.put(serviceMethodName, bindings.getMember(functionName));
+                } catch (Exception e) {
+                    throw new RuntimeException("Function not found: " + functionName, e);
+                }
+            }
         } catch (IOException e) {
             throw DbException.convert(e);
-        }
-
-        for (ServiceMethod serviceMethod : service.getServiceMethods()) {
-            String serviceMethodName = serviceMethod.getMethodName();
-            serviceMethodMap.put(serviceMethodName, serviceMethod);
-
-            String functionName = CamelCaseHelper.toCamelFromUnderscore(serviceMethodName);
-            try {
-                functionMap.put(serviceMethodName, bindings.getMember(functionName));
-            } catch (Exception e) {
-                throw new RuntimeException("Function not found: " + functionName, e);
-            }
+        } finally {
+            Thread.currentThread().setContextClassLoader(currentContextClassLoader);
         }
     }
 
