@@ -72,6 +72,7 @@ def hello(name):
     return "hello " + name;
 ```
 
+
 ## 创建服务
 
 执行以下 SQL 创建 python_hello_service
@@ -82,6 +83,14 @@ create service if not exists python_hello_service (
 )
 language 'python' implement by '/home/lealone/lealone-plugins/python/src/test/resources/python/hello_service.py';
 ```
+
+也可以用以下简化版本，无需声明服务的方法，会自动调用 py 文件里定义的方法
+
+```sql
+create service if not exists python_hello_service
+language 'python' implement by '/home/lealone/lealone-plugins/python/src/test/resources/python/hello_service.py';
+```
+
 
 ## 调用服务
 
