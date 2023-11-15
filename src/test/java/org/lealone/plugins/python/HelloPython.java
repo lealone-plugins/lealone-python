@@ -11,7 +11,7 @@ public class HelloPython {
 
     public static void main(String[] args) {
         try (Context context = Context.create()) {
-            context.eval("js", "print('Hello Python!');");
+            context.eval("python", "print('Hello Python!');");
         }
     }
 

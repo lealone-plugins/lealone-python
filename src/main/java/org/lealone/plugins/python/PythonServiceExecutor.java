@@ -13,6 +13,7 @@ import java.util.Map;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.HostAccess;
 import org.graalvm.polyglot.Source;
+import org.graalvm.polyglot.io.IOAccess;
 import org.lealone.common.exceptions.DbException;
 import org.lealone.common.util.CamelCaseHelper;
 import org.lealone.db.service.Service;
@@ -40,7 +41,7 @@ public class PythonServiceExecutor extends ServiceExecutorBase {
         ClassLoader currentContextClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(cl);
         try {
-            context = Context.newBuilder().allowIO(true).allowHostAccess(HostAccess.ALL)
+            context = Context.newBuilder().allowIO(IOAccess.ALL).allowHostAccess(HostAccess.ALL)
                     // allows access to all Java classes
                     .allowHostClassLookup(className -> true).build();
             source = Source.newBuilder("python", new File(service.getImplementBy())).build();

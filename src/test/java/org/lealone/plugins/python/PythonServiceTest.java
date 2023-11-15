@@ -11,11 +11,12 @@ import java.io.IOException;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
+import org.graalvm.polyglot.io.IOAccess;
 
 public class PythonServiceTest {
 
     public static void main(String[] args) {
-        try (Context context = Context.newBuilder().allowIO(true).build()) {
+        try (Context context = Context.newBuilder().allowIO(IOAccess.ALL).build()) {
             Source source;
             try {
                 File file = new File("./src/test/resources/python/hello_service.py");

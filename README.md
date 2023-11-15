@@ -2,33 +2,10 @@
 
 可以使用 Python 开发微服务或用户自定义函数的插件
 
-运行 Python 插件需要事先安装 GraalVM，目前不支持 Windows
-
-
-## 安装 GraalVM
-
-安装 GraalVM 请参考 https://www.graalvm.org/22.0/docs/getting-started/
-
-GraalVM 可以直接替换 JDK
-
-这里假设安装后的目录是 /home/lealone/graalvm-ee-java17-22.0.0.2
-
-接着配置一下 JAVA_HOME 和 PATH 环境变量
-
-export JAVA_HOME=/home/lealone/graalvm-ee-java17-22.0.0.2
-
-export PATH=$JAVA_HOME/bin:$PATH
-
-最后还需要安装 Python 组件
-
-gu install python
-
-更多信息参考 https://www.graalvm.org/22.0/reference-manual/python/
-
 
 ## 编译需要
 
-* jdk 1.8+
+* jdk 17+
 * maven 3.8+
 
 
