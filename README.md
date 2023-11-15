@@ -1,6 +1,6 @@
 # lealone-python
 
-可以使用 Python 开发微服务或用户自定义函数的插件
+在 Lealone 中使用 Python 语言开发微服务应用或编写用户自定义函数
 
 
 ## 编译需要
