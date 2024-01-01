@@ -26,7 +26,7 @@
 
 ```sql
 create plugin python
-  implement by 'org.lealone.plugins.python.PythonServiceExecutorFactory' 
+  implement by 'com.lealone.plugins.python.PythonServiceExecutorFactory' 
   class path '/home/lealone/lealone-plugins/python/target/lealone-python-plugin-6.0.0.jar';
 ```
 

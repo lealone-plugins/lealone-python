@@ -3,9 +3,9 @@
  * Licensed under the Server Side Public License, v 1.
  * Initial Developer: zhh
  */
-package org.lealone.plugins.python;
+package com.lealone.plugins.python;
 
-import org.lealone.main.Lealone;
+import com.lealone.main.Lealone;
 
 public class PythonServerStart {
 

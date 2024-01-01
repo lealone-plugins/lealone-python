@@ -3,12 +3,12 @@
  * Licensed under the Server Side Public License, v 1.
  * Initial Developer: zhh
  */
-package org.lealone.plugins.python;
+package com.lealone.plugins.python;
 
 import java.io.File;
 
-import org.lealone.db.service.Service;
-import org.lealone.db.service.ServiceExecutorFactoryBase;
+import com.lealone.db.service.Service;
+import com.lealone.db.service.ServiceExecutorFactoryBase;
 
 public class PythonServiceExecutorFactory extends ServiceExecutorFactoryBase {
 
