@@ -13,9 +13,9 @@
 
 运行 `mvn clean package -Dmaven.test.skip=true`
 
-生成 jar 包 `target/lealone-python-plugin-6.0.0.jar`
+生成 jar 包 `target/lealone-python-plugin-6.0.1.jar`
 
-假设 jar 包的绝对路径是 `/home/lealone/lealone-plugins/python/target/lealone-python-plugin-6.0.0.jar`
+假设 jar 包的绝对路径是 `/home/lealone/lealone-plugins/python/target/lealone-python-plugin-6.0.1.jar`
 
 
 ## 创建插件
@@ -27,7 +27,7 @@
 ```sql
 create plugin python
   implement by 'com.lealone.plugins.python.PythonServiceExecutorFactory' 
-  class path '/home/lealone/lealone-plugins/python/target/lealone-python-plugin-6.0.0.jar';
+  class path '/home/lealone/lealone-plugins/python/target/lealone-python-plugin-6.0.1.jar';
 ```
 
 要 drop 插件可以执行以下命令：
